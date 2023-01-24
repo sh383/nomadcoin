@@ -1,15 +1,19 @@
 package main
 
-type block struct {
-	data     string
-	hash     string
-	prevHash string
-}
+import (
+	"fmt"
 
-type blockchain struct {
-	blocks []block
-}
+	"github.com/sh383/nomadcoin/blockchain"
+)
 
 func main() {
-	chain := blockchain{}
+	chain := blockchain.GetBlockchain()
+	chain.AddBlock("Second Block")
+	chain.AddBlock("Third Block")
+	chain.AddBlock("Fourth Block")
+	for _, block := range chain.AllBlocks() {
+		fmt.Printf("Data: %s \n", block.Data)
+		fmt.Printf("Hash: %s \n", block.Hash)
+		fmt.Printf("PrevHash: %s \n", block.PrevHash)
+	}
 }
